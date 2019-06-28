@@ -1,0 +1,144 @@
+c++      csd1906
+嵌入式   esd
+下载笔记：
+code.tarena.com.cn
+账号：tarenacode
+密码：code_2013
+c语言  ，数据结构  ，UC （网络项目web）（不放弃）
+c++: 
+（Linux系统）c++ qt(项目)  网络爬虫（项目） 数据库（语句）  （window系统） win32 (vs2010) MFC  网络攻防（闵）
+
+
+嵌入式：
+   c++   qt   arm(裸板)   移植   驱动  人工智能（Python）
+   智能家居   智能小车（import）  
+Ubuntu kylin 16.04 LTS
+说明：Ubuntu系统 16.04 型号 longtime support长期支持服务
+
+Ubuntu系统和Linux系统的关系区别？？？？
+linux系统是人类
+Ubuntu是中国人
+Ubuntu是Linux系统的一个发行版本。
+Linux系统的发行版本：Ubuntu .red hat .debian...
+ubuntu的内核是Linux系统。
+查看系统信息： cat /etc/os-release 
+查看内核信息：cat /proc/version
+
+tarena@ubuntu:~$
+说明：
+tarena:用户名
+Ubuntu：计算机名称
+~：主目录 （家）
+$:当前的权限  普通用户的权限
+
+linux 下一切皆文件（包含设备，文件，文件夹，路径）。
+Linux下不分盘符 只有一个路径  根目录。“/”
+
+
+打开终端的方式：
+Ctrl + alt  + t
+ctrl + shfit +t     用alt + 数字就可以进行页面的切换
+
+放大：Ctrl + shift + '+'
+缩小： Ctrl + ‘-’
+
+命令：
+   命令的格式： 命令名称 [选项] [参数]
+    [选项] [参数]:都可以省略
+   
+   clear ：清屏
+   history：查看历史信息
+   tree -L 1:查看当前路径下1级目录
+    pwd :查看文件路径
+     ls :查看当前目录下所有文件
+     ls -l :查看文件夹所有信息
+     ls  -lh:文件大小显示单位的区别
+     ls  -a :查看隐藏文件
+     man   :帮助手册
+     man 1 + 命令 （ls）
+     man 2 + 系统调用（open）
+     man 3  + 库函数（printf）
+     mkdir  : 新建一个目录/文件夹
+     mkdir xly/day01 -p  : 可以新建多级目录 
+     vi     : 新建一个1.txt /01test.c
+     rmdir  : 删除文件夹/目录
+     rm  + 单个文件名称   : 删除单个文件
+     rm -r + 目录名称  ：删除目录
+ cp + 源文件（准备要包括的文件） + 准备要复制到的路径  : 
+       cat  + 文件名称:将文件内容打印到屏幕上 
+
+ 
+    相对路径和绝对路径：
+      绝对路径：从根目录的路径
+      相对路径：相对于当前目录的路径
+  
+
+共享文件夹的创建：
+   1.在window下新建一个文件夹名称为share（名字随便起）
+   2. 在选项“虚拟机”---“设置”--“共享文件夹”（点击总是启用） ----“添加”（添加自己share的路径）---“确定”
+   3.进入Linux系统中，cd /mnt/hgfs 就能看到共享文件夹share
+   
+
+
+
+drwxr-xr-x 2 tarena tarena 4096 Sep 18  2018 Desktop
+  d:文件夹/目录
+  rwx:可读可写可执行
+  rwx      r-x        r-x
+ 属主权限 属组权限   其他用户权限
+  2    硬链接数
+  tarena  : 文件所有者 
+  tarena  ：文件所属组
+  4096    ： 文件大小
+   Sep 18  2018：文件创建时间
+  Desktop  ：文件名称
+
+
+存储单位：
+     计算机最小的存储单位：bit(位)
+     计算机最基础的存储单位：byte(字节)
+     1字节 = 8bit。
+     其他的存储单位：1kb, 1Mb(兆), 1G, 1T.
+   
+   
+vim编译器：vi 1.txt  ,vi 01.c ,vi 02.cpp ....
+           一般模式
+            /     \
+ 按“a”"o""i"     ：wq(保存退出)
+           /       \
+         ↙         \
+  插入模式        命令模式
+       
+从插入模式到一般模式：按“esc”键。
+
+a : 在当前光标后进行插入
+i : 在当前光标前进行插入
+o : 在当前光标的下一行进行插入
+
+:wq  ---->保存退出
+:q!  ---->不保存退出
+:w   ---->保存不退出
+
+：set nu ---->显示行号
+：set nonu---->不显示行号
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+   
+
+
+ 
+
