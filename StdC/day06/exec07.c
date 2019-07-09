@@ -1,6 +1,6 @@
 #include<stdio.h>
 long long fun(int index){
-    static long long arr[50];//long long arr[50];
+    static long long arr[70];//long long arr[50];
     if(index <= 1){
         return 1;
     }
@@ -13,6 +13,6 @@ long long fun(int index){
     return arr[index - 1] + arr[index - 2];
 }
 int main(){
-    printf("%lld\n", fun(40));
+    printf("%lld\n", fun(60));
 }
 

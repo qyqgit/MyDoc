@@ -1,0 +1,16 @@
+vim : 依赖: vim-common (= 2:7.3.429-2ubuntu2) 但是 2:7.3.429-2ubuntu2.1 正要被安装
+
+sudo apt-get purge vim-common
+
+
+sudo apt-get update
+
+
+sudo apt-get upgrade
+
+
+sudo apt-get install vim
+
+ 
+
+Just do it!
