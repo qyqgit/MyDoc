@@ -20,4 +20,9 @@ int main(){
 	printf("%s\n", strcpy(str, "iot"));
 
 	printf("%s\n", strncpy(str, "123123", 2));
+
+	printf("%s\n", (char*)memset(str,'c',20));
+
+	printf("%s\n", strstr("abcdefg","cde"));
+	//printf("%s\n", strstr("abcdefg","xcde"));
 }

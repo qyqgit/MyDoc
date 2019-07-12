@@ -1,0 +1,9 @@
+a.out		: main.o get_num.o
+	gcc main.o get_num.o
+main.o		: main.c
+	gcc -c main.c
+get_num.o	: get_num.c
+	gcc -c get_num.c
+
+clean:
+	rm -rf *.o *.out
