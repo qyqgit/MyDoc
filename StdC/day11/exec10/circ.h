@@ -7,15 +7,14 @@ typedef struct circ{
 } CIRC;
 
 typedef CIRC* (*GET_CIRC_MALLOC)(POINT* pPoint, int r);
-typedef void (*PRINT_CIRC)(CIRC* circ);
+typedef void (*PRINT_CIRC)(CIRC* pCirc);
 
 typedef struct circ_protocol{
-	CIRC				circ;
 	GET_CIRC_MALLOC			getCircMalloc;
-	PRINT_CIRC			printCirc;
+	PRINT_CIRC			writeCirc;
 } CIRC_PROTOCOL;
 
-void		printCirc(CIRC* circ);
+void		writeCirc(CIRC* pCirc);
 CIRC*		getCircMalloc(POINT* pPoint, int r);
-CIRC_PROTOCOL*	getCircProtocolMalloc(CIRC* pCirc);
+CIRC_PROTOCOL*	getCircProtocolMalloc();
 #endif

@@ -1,9 +1,18 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include "lib.h"
+#include "stdout.h"
 #include "circ.h"
-
-void printCirc(CIRC* circ){
-	printf("circ_%d_%d_%d\n", circ->point.x, circ->point.y, circ->r);
+void fillCirc(char* pPixel, int* pX, int* pY, CIRC* pCirc){
+	if((*pX - pCirc->point.x) * (*pX - pCirc->point.x) + (*pY - pCirc->point.y) * (*pY - pCirc->point.y) < pCirc->r * pCirc->r){
+		POINT point;
+		point.x = *pX;
+		point.y = *pY;
+		writePoint(&point);
+	}	
+}
+void writeCirc(CIRC* pCirc){
+	forEachXyEx(gScreenBuff, sizeof(gScreenBuff[0][0]), WIDTH * HEIGHT, WIDTH, HEIGHT, (CALLBACKXYEX) fillCirc, pCirc);
 }
 
 CIRC* getCircMalloc(POINT* pPoint, int r){
@@ -18,14 +27,11 @@ CIRC* getCircMalloc(POINT* pPoint, int r){
 	return pCirc;
 }
 
-CIRC_PROTOCOL* getCircProtocolMalloc(CIRC* pCirc){
-	if(!pCirc)
-		return NULL;
+CIRC_PROTOCOL* getCircProtocolMalloc(){
 	CIRC_PROTOCOL* pCircProtocol = (CIRC_PROTOCOL*)malloc(sizeof(CIRC_PROTOCOL));
 	if(!pCircProtocol)
 		return NULL;
-	pCircProtocol->circ		= *pCirc;
 	pCircProtocol->getCircMalloc 	= getCircMalloc;
-	pCircProtocol->printCirc	= printCirc;
+	pCircProtocol->writeCirc	= writeCirc;
 	return pCircProtocol;
 }
