@@ -1,6 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <sys/stat.h>
+#include <unistd.h>
 #include "lib.h"
 #include "stdout.h"
 
@@ -26,7 +28,8 @@ void showPixel(char* pChar){
 }
 void screenShot(){
 	char tmp[100] = {0};
-	sprintf(tmp, "%04d.txt", screenShotIndex++);
+	mkdir("stdout", S_IRWXU);
+	sprintf(tmp, "stdout/%04d.txt", screenShotIndex++);
 	FILE* pFile = fopen(tmp, "w");
 	if(pFile){
 		forEachEx(gScreenBuff, sizeof(gScreenBuff[0][0]) * WIDTH, HEIGHT, (CALLBACKEX)screenShotLine, pFile);
@@ -40,4 +43,20 @@ void screenShotLine(char* lineBuff, FILE* pFile){
 }
 void screenShotWriteFile(char* pChar, FILE* pFile){
 	fwrite(pChar, sizeof(gScreenBuff[0][0]), 1, pFile);
+}
+void showImage(char* pFileName){
+	FILE* pFile = fopen(pFileName, "r");
+	if(pFile){
+		forEachEx(gScreenBuff, sizeof(gScreenBuff[0][0]) * WIDTH, HEIGHT, (CALLBACKEX)showImageLine, pFile);
+		fclose(pFile);
+		pFile = NULL;
+		showScreen();
+	}
+}
+void showImageLine(char* lineBuff, FILE* pFile){
+	forEachEx(lineBuff, sizeof(gScreenBuff[0][0]), WIDTH, (CALLBACKEX)showImageReadFile, pFile);
+	fseek(pFile, 1, SEEK_CUR);
+}
+void showImageReadFile(char* pChar, FILE* pFile){
+	fread(pChar, sizeof(gScreenBuff[0][0]), 1, pFile);
 }

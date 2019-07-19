@@ -34,7 +34,7 @@ int main(void){
 	k2 = (float)point2.y/(float)point2.x;
 	while(1){
 		initScreen();
-
+		showImage("background.dat");
 		goStraightLine(&point1, &k1, &b1, &turn1);
 		goStraightLine(&point2, &k2, &b2, &turn2);
 

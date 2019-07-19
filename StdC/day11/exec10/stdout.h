@@ -11,4 +11,7 @@ void showPixel(char* pChar);
 void screenShot();
 void screenShotLine(char* lineBuff, FILE* pFile);
 void screenShotWriteFile(char* pChar, FILE* pFile);
+void showImage();
+void showImageLine(char* lineBuff, FILE* pFile);
+void showImageReadFile(char* pChar, FILE* pFile);
 #endif
