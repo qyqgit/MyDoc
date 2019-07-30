@@ -6,6 +6,13 @@
 #include "lib.h"
 #include "stdout.h"
 
+void showLine(char* lineBuff);
+void showPixel(char* pChar);
+void screenShotLine(char* lineBuff, FILE* pFile);
+void screenShotWriteFile(char* pChar, FILE* pFile);
+void showImageLine(char* lineBuff, FILE* pFile);
+void showImageReadFile(char* pChar, FILE* pFile);
+
 char gScreenBuff[HEIGHT][WIDTH] = {0};
 int screenShotIndex = 0;
 void initScreen(){

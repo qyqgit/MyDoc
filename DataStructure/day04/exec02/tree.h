@@ -20,4 +20,6 @@ int tree_insert(tree_t *p_tree, int val);
 void tree_miter(const tree_t *p_tree, p_func_t p_func);
 int tree_remove(tree_t *p_tree, int val);
 void tree_account(tree_t *p_tree, int *p_count);
+int tree_size(const tree_t *p_tree);
+int tree_height(const tree_t *p_tree);
 #endif

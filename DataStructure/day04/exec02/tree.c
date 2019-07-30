@@ -96,11 +96,33 @@ int tree_remove(tree_t *p_tree, int val){
 	return 1;
 }
 //计算节点的个数
-void tree_account(tree_t *p_tree, int *p_count){
-	//后序遍历
-	if(!p_tree->p_node)
-		return;	
-	tree_account(&(p_tree/*最上面的方块handle*/->p_node/*最大的圆圈tree_t*/->left/*左子树*/), p_count);
-	tree_account(&(p_tree->p_node->right), p_count);
-	(*p_count)++;
+//void tree_account(tree_t *p_tree, int *p_count){
+//	//后序遍历
+//	if(!p_tree->p_node)
+//		return;	
+//	tree_account(&(p_tree/*最上面的方块handle*/->p_node/*最大的圆圈tree_t*/->left/*左子树*/), p_count);
+//	tree_account(&(p_tree->p_node->right), p_count);
+//	(*p_count)++;
+//}
+int tree_size(const tree_t *p_tree){
+	int size = 0;
+	if(!p_tree->p_node){
+		return 0;
+	}
+	size = tree_size(&(p_tree->p_node->left));//统计左字树节点个数
+	size += tree_size(&(p_tree->p_node->right));//统计右节点个数
+	return size + 1;
+	
+}
+//计算树的高度
+int tree_height(const tree_t *p_tree){
+	int height, right_height, left_height  = 0;
+	if(!p_tree->p_node){
+		return 0;
+	}
+	left_height = tree_height(&(p_tree->p_node->left));
+	right_height = tree_height(&(p_tree->p_node->right));
+	height = left_height >= right_height ? left_height : right_height;
+	return height + 1;
+	
 }
