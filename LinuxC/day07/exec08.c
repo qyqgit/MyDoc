@@ -9,10 +9,10 @@ int main(int argc, char *argv[]){
 		pid_t pid = fork();
 		if(pid == -1)E_MSG("fork", -1);
 		if(pid == 0){
-			//break;
+			break;//4*1
 		}	
 		else{
-			break;
+			//break;//1*4
 		}
 		
 		

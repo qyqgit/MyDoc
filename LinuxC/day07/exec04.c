@@ -15,7 +15,7 @@ int main(void){
 	if(pid == 0){
 		printf("%d\n", getpid());
 		atexit(bye);
-		printf("%d\n", getpid());
+		printf("%d\n", getpid());//子进程继承父进程注册的遗言函数
 	}else{
 		printf("%d\n", getpid());
 		atexit(bye);

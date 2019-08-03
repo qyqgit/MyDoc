@@ -10,5 +10,5 @@ int main(void){
 	getchar();
 	fork();
 	exit(321);
-	//return 321;
+	//echo $?
 }

@@ -56,24 +56,42 @@ int isdir(char *path){
 		return 0;
 }
 int main(int argc, char *argv[]){
-	if(isdir(argv[1])){
-		char pathbuf[100] = {0};
-
+	if(argc == 1){
 		struct dirent *p_dirent;
-		DIR *p_dir = opendir(argv[1]);
+		DIR *p_dir = opendir(".");
 		if(p_dir == NULL){
 			perror("opendir");
 			return -1;
 		}
 		while(p_dirent = readdir(p_dir)){
-			strcpy(pathbuf, argv[1]);
-			strcat(pathbuf, "/");
-			readfile(strcat(pathbuf,p_dirent->d_name), p_dirent->d_name);
-			pathbuf[0] = '\0';
-		}
-			
+			readfile(p_dirent->d_name, p_dirent->d_name);
+		}	
 		closedir(p_dir);
-	}else
-		readfile(argv[1], argv[1]);
+	}
+
+	int index = 1;
+	while(index < argc) {
+		printf("%s:\n",argv[index]);
+		if(isdir(argv[index])){
+			char pathbuf[100] = {0};
+
+			struct dirent *p_dirent;
+			DIR *p_dir = opendir(argv[index]);
+			if(p_dir == NULL){
+				perror("opendir");
+				return -1;
+			}
+			while(p_dirent = readdir(p_dir)){
+				strcpy(pathbuf, argv[index]);
+				strcat(pathbuf, "/");
+				readfile(strcat(pathbuf,p_dirent->d_name), p_dirent->d_name);
+				pathbuf[0] = '\0';
+			}
+			
+			closedir(p_dir);
+		}else
+			readfile(argv[index], argv[index]);
+		index++;
+	}
 	return 0;
 }

@@ -6,9 +6,10 @@ int main(void){
 	pid_t pid = fork();
 	if(pid == -1)E_MSG("fork", -1);
 	if(pid == 0){
-		printf("child pid:%d\n" ,getpid());
+		printf("child pid:%d\n" ,getpid());//zombie process
 		exit(0);
 	}else{
+		printf("parent pid:%d\n" ,getpid());
 		sleep(30);
 	}
 	return 0;

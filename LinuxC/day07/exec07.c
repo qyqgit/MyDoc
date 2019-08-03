@@ -10,7 +10,7 @@ int main(void){
 		printf("10child ppid:%d\n" ,getppid());
 		sleep(3);
 		
-		printf("13child ppid:%d\n", getppid());
+		printf("13child ppid:%d\n", getppid());//orphan process
 		sleep(30);
 		exit(0);
 	}else{
