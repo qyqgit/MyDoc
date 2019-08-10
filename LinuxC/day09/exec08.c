@@ -1,3 +1,9 @@
+/*
+ * bash.c
+ *
+ *  Created on: 2019年8月4日
+ *      Author: vim
+ */
 #include <stdio.h>
 #include <unistd.h>
 #include <stdlib.h>
@@ -71,51 +77,65 @@ void formatstrmalloc(char *inputstr, int *argcc, void *argvv){
 void showenv(){
 	int i = 0;
 	while(environ[i]){
-		printf("%s\n",environ[i]);
+		printf("_%s\n",environ[i]);
 		i++;
 	}
 }
+void mycd(char *pwd){
+	char	path[255];
+	chdir(pwd);
+	getcwd(path, 255);
+	setenv("PWD", path, 1);
+}
 int main(int argc, char *argv[]){
 	char	inputstr[255];
+	char	pwd[255];
 	int	quit = 0;
-#if 10	
+#if 10
 	do{
-		fgets(inputstr, 200, stdin);
+		printf("%s$",getcwd(pwd, 255));
+		fgets(inputstr, 255, stdin);
+		if(!strcmp("\n", inputstr))continue;
 		if(!(strstr(inputstr, "quit") - inputstr))
 			break;
 		else{
-			const char filename[100];
+			const char filename[255];
 			strncpy((char*)filename, inputstr, strlen(inputstr) - 1);//remove '\n'
 			((char*)filename)[strlen(inputstr) - 1] = '\0';
-			
+
+			int argcc = 0;
+			char *argvvss[15];
+			char buf[15][100];
+			char *argvv[15];
+			formatstrmalloc((char*)filename, &argcc, argvvss);
+			int num = 0;
+			while(argcc){
+				strcpy(buf[num], argvvss[num]);
+				free(argvvss[num]);
+				argvv[num] = buf[num];
+				argcc--;
+				num++;
+			}
+			argvv[num++] = '\0';//Both argv and envp must be terminated by a null pointer.
+
+			if(!strcmp("cd", buf[0])){
+				mycd(buf[1]);
+				continue;
+			}
+
+			char *p = getpathmall(buf[0]);
+			if(p){
+				strcpy(buf[0], p);
+				free(p);
+			}
+
 			pid_t pid = fork();
 			if(pid == -1){
 				perror("fork");
-				exit(-1);
+				continue;
 			}
 			if(pid == 0){
-				int argcc = 0;
-				char *argvvss[15];
-				char buf[15][100];
-				char *argvv[15];
-				formatstrmalloc((char*)filename, &argcc, argvvss);
-				int num = 0;
-				while(argcc){
-					strcpy(buf[num], argvvss[num]);
-					free(argvvss[num]);
-					argvv[num] = buf[num];
-					argcc--;
-					num++;
-				}
-				argvv[num++] = '\0';//Both argv and envp must be terminated by a null pointer.
-				char *p = getpathmall(buf[0]);
-				if(p == NULL){
-					printf("not found.\n");
-					exit(-1);
-				}
-				strcpy(inputstr, p);
-				free(p);
-				execve(inputstr, argvv, environ);
+				execve(buf[0], argvv, environ);
 				perror("execve");
 				exit(-1);
 			} else {
@@ -125,6 +145,8 @@ int main(int argc, char *argv[]){
 		}
 		inputstr[0] = '\0';
 	}while(!quit);
-#endif	
+#endif
 	return 0;
 }
+
+
