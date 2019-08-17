@@ -53,3 +53,9 @@ dkms.conf
 
 *.swo
 *.swp
+/.metadata/
+/RemoteSystemsTempFiles/
+.cproject
+.gitignore
+.project
+.settings/
