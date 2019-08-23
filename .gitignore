@@ -53,9 +53,14 @@ dkms.conf
 
 *.swo
 *.swp
+
 /.metadata/
 /RemoteSystemsTempFiles/
 .cproject
 .gitignore
 .project
 .settings/
+
+build-*-Desktop_Qt_5_4_1_GCC_32bit-Debug/
+*.jpg
+*.pro.user
