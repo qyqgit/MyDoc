@@ -5,9 +5,30 @@
 #include <sys/socket.h>
 #include <arpa/inet.h>
 #include <stdlib.h>
-#include <fcntl.h>
+#include <pthread.h>
+
+char buf[256];
+int connectfd;
+
+void *product(void *arg){
+
+	while(1){
+		int readsize = read(connectfd, buf, 256);
+		write(1, buf, readsize);
+	}
+	
+}
+void *consume(void *arg){
+
+	while(1){
+		//printf("input:");
+		fgets(buf, 256, stdin);
+		write(connectfd, buf, strlen(buf));
+	}
+	
+}
+
 int main(int argc, char *argv[]){
-	char buf[256];
 	struct sockaddr_in serv;
 	serv.sin_family = AF_INET;
 	serv.sin_addr.s_addr = htonl(INADDR_ANY);
@@ -33,26 +54,19 @@ int main(int argc, char *argv[]){
 		return -1;
 	}
 
-	int connectfd = accept(socketfd, (struct sockaddr*)&cli_addr, &cli_len);
+	connectfd = accept(socketfd, (struct sockaddr*)&cli_addr, &cli_len);
 	if(connectfd == -1){
 		perror("accept");
 		return -1;
 	}
 	inet_ntop(AF_INET, &cli_addr.sin_addr.s_addr, cli_ip, INET_ADDRSTRLEN);
-	printf("%s:\n", cli_ip);
-	int flags = fcntl(socketfd, F_GETFL, 0);
-	flags |= O_NONBLOCK;
-	fcntl(socketfd, F_SETFL, flags);
-	while(1){
-
-		int readsize = read(connectfd, buf, 256);
-		buf[readsize] = '\0';
-		printf("%s",buf);
-		printf("input:");
-		fgets(buf, 256, stdin);
-		write(connectfd, buf, strlen(buf));
-		
-	}
+	printf("%s\n", cli_ip);
+	pthread_t pid, cid;
+	pthread_create(&pid, NULL, product, NULL);
+	pthread_create(&cid, NULL, consume, NULL);
+	
+	pthread_join(pid, NULL);
+	pthread_join(cid, NULL);
 	close(connectfd);
 	close(socketfd);
 	return 0;
