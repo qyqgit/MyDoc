@@ -13,13 +13,16 @@ class MainWindow : public QMainWindow
 
 public:
     explicit MainWindow(QWidget *parent = 0);
-    MainWindow(QWidget *parent, void* buf);
     ~MainWindow();
 public:
     void updateText(const QString& text);
     void timerEvent(QTimerEvent *event);
+    void init();
+    static void* main_serv(void*);
+    static void* product(void*);
+    static void* consume(void*);
     int clock;
-    void* buf;
+
 
 private slots:
     void on_pushButton_clicked();
