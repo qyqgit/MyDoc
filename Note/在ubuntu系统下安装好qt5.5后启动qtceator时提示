@@ -1,0 +1,12 @@
+在ubuntu系统下安装好qt5.5后启动qtceator时提示：
+Qt5.5.1/Tools/QtCreator/lib/qtcreator/plugins/libHelp.so: 无法加载库Qt5.5.1/Tools/QtCreator/lib/qtcreator/plugins/libHelp.so：(libgstapp-0.10.so.0: 无法打开共享对象文件: 没有那个文件或目录)
+
+解决方法：
+终端命令：
+
+sudo apt-get install libqt4-dev
+sudo apt-get install libgstreamer0.10-dev
+sudo apt-get install libgstreamer-plugins-base0.10-dev
+
+再启动QT就OK了。
+
