@@ -11,6 +11,7 @@ MyLabel::MyLabel(QWidget *parent) :
     pt = new QPoint();
     pt->rx() = qrand() % this->parentWidget()->width();
     pt->ry() = qrand() % this->parentWidget()->height();
+    this->move(pt->x(), pt->y());
     k = (qrand() % 1) + 1;
     b = 0;
     turn = (qrand() % 2);

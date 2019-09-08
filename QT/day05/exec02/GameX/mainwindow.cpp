@@ -17,6 +17,10 @@ MainWindow::MainWindow(QWidget *parent) :
 MainWindow::~MainWindow()
 {
     delete ui;
+    delete browser;
+    for(int i = 0; i < NUM; i++){
+        delete labelx[i];
+    }
 }
 void MainWindow::timerEvent(QTimerEvent *){
     QRect bRc = browser->rect();
@@ -32,4 +36,16 @@ void MainWindow::timerEvent(QTimerEvent *){
             browser->die();
         }
     }
+//    for(int i = 0; i < NUM; i++){
+//        QRect lRci = labelx[i]->rect();
+//        lRci.translate(labelx[i]->pos());
+//        for(int j = 0; j < NUM; j++){
+//            QRect lRcj = labelx[j]->rect();
+//            lRcj.translate(labelx[j]->pos());
+//            if(i != j && labelx[i]->life != 0 && labelx[j]->life != 0 && lRci.contains(lRcj)){
+//                labelx[i]->eat(labelx[j]->life);
+//                labelx[j]->die();
+//            }
+//        }
+//    }
 }
