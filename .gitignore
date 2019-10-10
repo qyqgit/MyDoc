@@ -64,3 +64,5 @@ dkms.conf
 build-*-Desktop_Qt_5_4_1_GCC_32bit-Debug/
 *.jpg
 *.pro.user
+
+*.bin
