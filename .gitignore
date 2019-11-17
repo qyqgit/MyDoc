@@ -61,7 +61,7 @@ dkms.conf
 .project
 .settings/
 
-build-*-Desktop_Qt_5_4_1_GCC_32bit-Debug/
+build-*-Desktop_Qt_*_*_*_GCC_*bit-Debug/
 *.jpg
 *.pro.user
 
